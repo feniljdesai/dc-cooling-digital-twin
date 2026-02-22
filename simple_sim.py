@@ -25,7 +25,7 @@ def simulate():
     Kp = 0.15
 
     # Ambient
-    T_amb_C = np.ones(n) * (28.0 + 4.0)  # 28C + 4C heat island
+    T_amb_C = np.ones(n) * (28.0 + 4.0)
 
     # IT load with spikes
     Q_it_W = np.ones(n) * 8e6
@@ -70,7 +70,7 @@ def simulate():
         energy_Wh += 0.5 * (P_chiller_W[i] + P_chiller_W[i - 1]) * dt_s / 3600.0
     energy_MWh = float(energy_Wh / 1e6)
 
-    # Save to Excel .xlsx
+    # Save to Excel .xlsx (THIS MUST BE INSIDE simulate())
     wb = Workbook()
     ws = wb.active
     ws.title = "timeseries"
@@ -100,7 +100,7 @@ def simulate():
     print(f"Chiller energy (2 hours): {energy_MWh:.2f} MWh")
     print("Saved: results_timeseries.xlsx")
 
-    # Plot 1
+    # Plots
     plt.figure()
     plt.plot(t_min, Q_it_W / 1e6, label="IT Load (MW)")
     plt.plot(t_min, Q_cool_W / 1e6, label="Cooling Provided (MW)")
@@ -112,7 +112,6 @@ def simulate():
     plt.savefig("results_load_vs_cooling.png", dpi=200)
     plt.show()
 
-    # Plot 2
     plt.figure()
     plt.plot(t_min, T_supply_C, label="CHW Supply Temp (C)")
     plt.axhline(T_set_C, linestyle="--", label="Setpoint")
@@ -124,7 +123,6 @@ def simulate():
     plt.savefig("results_supply_temp.png", dpi=200)
     plt.show()
 
-    # Plot 3
     plt.figure()
     plt.plot(t_min, P_chiller_W / 1e6, label="Chiller Electric Power (MW)")
     plt.xlabel("Time (min)")
