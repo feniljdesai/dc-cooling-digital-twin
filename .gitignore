@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.pyo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Outputs
+results_*.png
+results_timeseries.csv
+results_timeseries.xlsx
